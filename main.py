@@ -24,7 +24,7 @@ def record_10sec(outputFile):
         data = stream.read(CHUNK)
         frames.append(data)
 
-    print("Finish")
+    print("** Done Recodring **")
 
     stream.stop_stream()
     stream.close()
@@ -37,10 +37,13 @@ def record_10sec(outputFile):
     wf.writeframes(b''.join(frames))
     wf.close()
 
-record_10sec('output10.wav')
-audio = AudioSegment.from_file('output5.wav','wav')
+FILE = "output.wav"
+REPLAY_X = 1
+record_10sec(FILE)
+
+audio = AudioSegment.from_file(FILE, 'wav')
 invers = audio.invert_phase()
 print("ca joue")
-play(invers*10)
+play(invers * REPLAY_X)
 
-print('Really Finished')
+print('** Finished **')
